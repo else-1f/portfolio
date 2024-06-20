@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liam Eggleston</title>
+    <style>
+        @font-face {
+            font-family: Icons;
+            src: url('../regular.woff2') format('woff2');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: Inter;
+            src: url('../Inter.ttf') format('ttf');
+        }
+        :root {
+            --background: #121212;
+            --foreground: #212023;
+            --item: #2f2e31;
+            --light: #3b3a3e;
+            --primary: #f26a79;
+            --secondary: #7a7a7a;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            outline: none;
+            border: none;
+            background: none;
+            font-family: "Inter", sans-serif;
+        }
+        span.icon { font-family: Icons; font-weight: 500; }
+        button { cursor: pointer; }
+        a { color: #3f51c7; }
+
+        body {
+            background: var(--background);
+            height: 100vh;
+            overflow: hidden;
+
+            display: grid;
+            grid-template-rows: 70px 60px 1fr;
+        }
+        header, menu, main {
+            padding: 0 max(25px, calc(50% - 600px));
+            width: min(calc(100% - 50px), 1200px);
+        }
+        header {
+            background: var(--foreground);
+
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        header > span.title {
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            margin-right: auto;
+        }
+        header > a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 450;
+            transition: color 0.3s;
+
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        header > a:hover { color: white; }
+        header > a > span.icon { font-size: 14px; }
+
+        menu {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        menu > a {
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        menu > span {
+            color: white;
+            font-weight: 550;
+            font-size: 14px;
+            margin-left: auto;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        menu > span > span.icon { font-size: 14px; }
+
+        main {
+            height: 100%;
+            overflow: hidden auto;
+            color: white;
+            /* padding: 0 25px 20px; */
+
+            display: flex;
+            flex-direction: column;
+        }
+        main > div {
+            display: flex;
+            gap: 6px;
+        }
+        main > div > span {
+            background: #f26a7930;
+            color: var(--primary);
+            padding: 4px 7px;
+            font-size: 14px;
+            border-radius: 7px;
+        }
+        main > div > span > span.icon { font-size: 12px;}
+        main > img {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            background: var(--foreground);
+            margin-top: 10px;
+        }
+        main > span.title {
+            margin-top: 10px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        main > p { margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <header>
+        <span class="title">Liam Eggleston</span>
+        <a href="../portfolio.html"><span class="icon"></span>portfolio</a>
+        <a href=""><span class="icon"></span>résumé</a>
+    </header>
+    <menu>
+        <a href="blogs.html"><span class="icon"></span></a>
+        <span><span class="icon"></span>106</span>
+    </menu>
+    <main>
+        <div>
+            <span><span class="icon">#</span> tag 1</span>
+            <span><span class="icon">#</span> tag 2</span>
+            <span><span class="icon">#</span> tag 3</span>
+            <span><span class="icon">#</span> tag 4</span>
+            <span><span class="icon">#</span> tag 5</span>
+        </div>
+        <span class="title">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
+        <img src="asd" alt="">
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet officiis provident eligendi error optio laudantium cupiditate cumque dicta ab voluptatem, libero dignissimos a asperiores quis reprehenderit, alias necessitatibus nesciunt ipsum tenetur doloribus numquam eum? Corrupti ducimus dignissimos laudantium modi, iusto nemo voluptates quibusdam qui magnam error recusandae fugit?
+            <br><br>
+            Quis, debitis numquam? Facere repellendus, eius nihil recusandae debitis exercitationem est illo dignissimos accusamus consequuntur. Reprehenderit minus laboriosam vitae totam deserunt, nihil cum? Magnam dolore recusandae ex aut consequatur doloribus assumenda omnis sint, eius explicabo perferendis quo, cum praesentium tenetur iste incidunt harum quidem aperiam officia nesciunt? Dicta, architecto corrupti exercitationem iusto eaque nostrum. Quo, ipsa omnis tempora nostrum voluptates velit, maxime magnam incidunt iste, officia facilis perspiciatis maiores numquam provident at eveniet nulla asperiores.
+            <br><br>
+            Dolorum voluptates delectus fugit porro quam mollitia beatae nobis laborum, nam ratione amet molestias sequi temporibus totam voluptatibus nesciunt sed distinctio ab modi alias, debitis explicabo omnis! Amet dolore possimus hic nostrum exercitationem magni corporis sapiente eum quidem quas doloribus corrupti fuga ad ab dicta deleniti expedita dignissimos facere velit reprehenderit unde facilis, rerum voluptatibus similique. Dolore impedit neque laborum maiores, id quo eum, incidunt sapiente magnam suscipit ab! Quidem aliquam at eius, praesentium numquam dolorem, beatae nesciunt vel similique reiciendis saepe. Voluptatum eveniet odio exercitationem magni modi quisquam ullam accusamus saepe voluptate reprehenderit eum labore voluptatem dolores aut, obcaecati vel officia natus reiciendis a dolorem amet, dolore veniam?
+            <br><br>
+            Rerum iste autem quos dolores est unde, hic voluptas architecto quaerat? Ipsam magnam quibusdam facere. Qui, temporibus vitae!
+        </p>
+    </main>
+</body>
+</html>

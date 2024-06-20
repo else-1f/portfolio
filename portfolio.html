@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liam Eggleston</title>
+    <style>
+        @font-face {
+            font-family: Icons;
+            src: url('./regular.woff2') format('woff2');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: Icons;
+            src: url('./light.woff2') format('woff2');
+            font-weight: 300;
+        }
+        @font-face {
+            font-family: Icons;
+            src: url('./brands.woff2') format('woff2');
+            font-weight: 800;
+        }
+        @font-face {
+            font-family: Inter;
+            src: url('./Inter.ttf') format('ttf');
+        }
+        :root {
+            --background: #121212;
+            --foreground: #212023;
+            --item: #2f2e31;
+            --light: #3b3a3e;
+            --primary: #f26a79;
+            --secondary: #7a7a7a;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            outline: none;
+            border: none;
+            background: none;
+            font-family: "Inter", sans-serif;
+        }
+        span.icon { font-family: Icons; font-weight: 500; }
+        span.icon.light { font-weight: 300; }
+        span.icon.brands { font-weight: 800; }
+        button { cursor: pointer; }
+        a { color: #3f51c7; }
+
+        html {
+            overflow: hidden auto;
+            scroll-behavior: smooth;
+            color: var(--background);
+            background: var(--background);
+            scroll-padding-top: 60px;
+        }
+
+        header {
+            position: fixed;
+            z-index: 1;
+            width: min(calc(100% - 148px), 1152px);
+            height: 60px;
+            top: 0;
+            left: max(50px, calc(50% - 600px));
+            padding: 0 24px;
+            border-radius: 0 0 10px 10px;
+            background: white;
+            transition:
+                padding 0.4s,
+                border-radius 0.4s,
+                width 0.6s,
+                box-shadow 0.8s,
+                left 0.4s;
+            box-shadow: 0 0 0 #00000030;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header > span {
+            color: var(--background);
+            font-weight: 700;
+            font-size: 18px;
+        }
+        header > nav {
+            display: flex;
+            gap: 14px;
+        }
+        header > nav > a {
+            color: var(--background);
+            text-decoration: none;
+        }
+        header > div {
+            height: 25px;
+
+            display: grid;
+            grid-auto-columns: 25px;
+            gap: 16px;
+            grid-auto-flow: column;
+        }
+        header > div > a {
+            font-family: Icons;
+            font-weight: 800;
+            font-size: 25px;
+            color: var(--background);
+            text-decoration: none;
+        }
+        header.scrolled {
+            width: min(1200px, calc(100% - 100px));
+            left: 0;
+            border-radius: 0;
+            padding: 0 max(50px, calc(50% - 600px));
+            box-shadow: 0 0 20px #00000030;
+        }
+        
+        body > section {
+            padding: 50px max(50px, calc(50% - 600px));
+            height: max-content;
+            background: white;
+        }
+        section.dark {
+            background: var(--background);
+            color: white;
+        }
+        section#about {
+            padding-top: 140px;
+            padding-bottom: 70px;
+            column-gap: 20px;
+            row-gap: 15px;
+
+            display: grid;
+            grid-template: 23px auto 40px / 1fr 1fr;
+        }
+        section#about > span.name {
+            font-size: 30px;
+            font-weight: 700;
+            justify-content: start;
+
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        section#about > span.name > img {
+            background: var(--secondary);
+            width: 45px;
+            height: 45px;
+            border-radius: 25px;
+            object-fit: cover;
+            object-position: top;
+        }
+        section#about > p {
+            line-height: 25px;
+            font-size: 18px;
+            font-weight: 460;
+        }
+        section#about > footer {
+            background: var(--foreground);
+            width: max-content;
+            padding: 0 10px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 550;
+            line-height: 40px;
+        }
+        section#about > footer > span {
+            display: flex;
+            gap: 8px;
+        }
+        section#about > footer > span > a {
+            font-family: Icons;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--secondary);
+            transition: color 0.2s;
+            font-size: 18px;
+        }
+        section#about > footer > span > a:hover { color: white; }
+        section#about > div {
+            grid-area: span 3;
+            background: var(--foreground);
+            border-radius: 10px;
+            text-indent: 0;
+            padding: 20px 20px 15px;
+            line-height: 27px;
+            font-size: 0;
+            min-height: 262px;
+            align-self: center;
+        }
+
+        section#about > div * {
+            position: relative;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            text-underline-offset: 2px;
+        }
+
+        span.cursor { opacity: 0; }
+        span.cursor.active { animation: blink 0.5s infinite alternate; }
+
+        @keyframes blink {
+            from { opacity: 1 }
+            50% { opacity: 1 }
+            51% { opacity: 0 }
+            to { opacity: 0 }
+        }
+
+        section > span:first-child {
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 40px;
+
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+        }
+        section#technologies > nav {
+            display: grid;
+            gap: 15px;
+            grid-auto-rows: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        section#technologies > nav > div {
+            background: #f3f3f3;
+            padding: 10px;
+            border-radius: 7px;
+            color: var(--background);
+            font-weight: 650;
+
+            display: grid;
+            grid-template: 100% / 40px 1fr;
+            align-items: center;
+            gap: 12px;
+        }
+        section#technologies > nav > div > img {
+            background: #eee;
+            height: 40px;
+            border-radius: 5px;
+        }
+
+        section#blog > nav {
+            overflow: hidden;
+            scroll-behavior: smooth;
+
+            display: grid;
+            gap: 20px;
+            grid-template-rows: 400px;
+            grid-auto-columns: 350px;
+            grid-auto-flow: column;
+        }
+        section#blog > nav > article {
+            border-radius: 10px;
+            background: var(--foreground);
+        }
+        section#blog > nav > article > img {
+            background: var(--item);
+            width: 100%;
+            height: 160px;
+            border-radius: 10px 10px 0 0;
+        }
+        section#blog > nav > article > div {
+            padding: 15px 20px 10px;
+
+            display: flex;
+            gap: 8px;
+        }
+        section#blog > nav > article > div > span {
+            padding: 5px 9px;
+            border-radius: 14px;
+            font-size: 12px;
+            background: var(--item);
+        }
+        section#blog > nav > article > span.info {
+            display: block;
+            padding: 0 20px;
+            font-weight: 300;
+            font-size: 14px;
+        }
+        section#blog > nav > article > span.title {
+            display: block;
+            font-weight: 600;
+            padding: 6px 20px;
+            font-size: 18px;
+        }
+        section#blog > nav > article > p {
+            padding: 0px 20px;
+            font-size: 15px;
+            line-height: 20px;
+        }
+
+        section#blog > footer {
+            margin-top: 20px;
+            height: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        section#blog > footer > section.current {
+            position: relative;
+            
+            display: flex;
+            gap: 6px;
+        }
+        section#blog > footer > section.current > div {
+            background: var(--secondary);
+            height: 9px;
+            width: 9px;
+            border-radius: 5px;
+        }
+        section#blog > footer > section.current > div.active {
+            position: absolute;
+            width: 24px;
+            background: white;
+            left: 0px;
+        }
+        @keyframes forward {
+            from { left: calc(var(--destination) - 15px); }
+            33% { left: calc(var(--destination) - 15px); width: 39px; }
+            66% { left: var(--destination); width: 24px; }
+            to { left: var(--destination); width: 24px; }
+        }
+        @keyframes backward {
+            from { left: unset; right: calc(100% - var(--destination) - 24px); }
+            33% { left: unset; right: calc(100% - var(--destination) - 24px); width: 39px; }
+            66% { left: unset; right: calc(100% - var(--destination) - 9px); width: 24px; }
+            to { left: unset; right: calc(100% - var(--destination) - 9px); width: 24px; }
+        }
+        section#blog > footer > section.current > div.active.forwards { animation: forward 0.4s; }
+        section#blog > footer > section.current > div.active.backwards { animation: backward 0.4s; }
+        section#blog > footer > section.navigation {
+            display: flex;
+            gap: 11px;
+        }
+        section#blog > footer > section.navigation > button {
+            color: white;
+            font-size: 16px;
+        }
+        section#blog > footer > section.navigation > button:disabled { color: var(--secondary); }
+    
+        section#music > p {
+            font-weight: 500;
+            padding: 12px 16px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border: 4px solid #f3f3f3;
+            color: var(--foreground);
+        }
+        section#music > nav {
+            margin-top: 15px;
+            
+            display: grid;
+            grid-auto-rows: 100px; /* 301px */
+            grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+            gap: 25px;
+        }
+        section#music > nav > article {
+            white-space: nowrap;
+            background: #f3f3f3;
+            padding: 12px 16px 15px;
+            border-radius: 8px;
+            
+            display: grid;
+            align-items: center;
+            gap: 6px 5px;
+            grid-template: 40px /* 200px */ 28px / 40px auto auto;
+        }
+        section#music > nav > article > img {
+            height: 30px;
+            width: 30px;
+            justify-self: center;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+        }
+        section#music > nav > article > span.composer {
+            font-weight: 550;
+        }
+        section#music > nav > article > span.info {
+            font-size: 14px;
+            text-align: end;
+            align-self: start;
+            margin: 8px;
+        }
+        section#music > nav > article > span.title {
+            /* margin-top: 4px; */
+            font-weight: 600;
+            font-size: 17px;
+        }
+        section#music > nav > article > video {
+            background: var(--item);
+            height: 100%;
+            width: 100%;
+            border-radius: 6px;
+            grid-area: 2 / span 3;
+        }
+
+        section#projects > nav {
+            display: grid;
+            grid-auto-rows: 155px;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        }
+        section#projects > nav > article {
+            background: var(--foreground);
+            border-radius: 8px;
+            padding: 17px 20px;
+
+            display: grid;
+            grid-template: 28px 60px 40px / 100%;
+        }
+        section#projects > nav > article > span.name {
+            font-weight: 600;
+            font-size: 22px;
+        }
+        section#projects > nav > article > button {
+            justify-self: end;
+            color: white;
+            font-size: 24px;
+        }
+
+        section#education {
+            display: flex;
+            flex-direction: column;
+        }
+        section#education > span.section {
+            font-size: 20px;
+            font-weight: 550;
+            margin-top: 20px;
+        }
+        section#education > ul {
+            columns: 2;
+            gap: 10px;
+            font-size: 17px;
+            margin: 10px 0 0;
+        }
+        section#education > ul > li { margin: 0 0 10px 26px; }
+
+        section#footer {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+        }
+        section#footer > span {
+            font-size: 18px;
+            margin-bottom: 0;
+
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        section#footer > span > span.icon {
+            color: #F44336;
+            font-size: 22px;
+        }
+        section#footer > div {
+            display: grid;
+            gap: 12px;
+            justify-content: center;
+            grid-template: 25px / repeat(3, 25px);
+        }
+        section#footer > div > a {
+            font-size: 25px;
+            font-family: Icons;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <span>Liam Eggleston</span>
+        <div>
+            <a href="https://github.com/el5eif" target="_blank"></a>
+            <a href="https://www.youtube.com/@else1f/featured" target="_blank"></a>
+            <a href="https://www.instagram.com/liam.eggs/" target="_blank"></a>
+        </div>
+        <nav>
+            <a href="#top">about me</a>
+            <a href="#technologies">technologies</a>
+            <a href="./blogs.html">blog</a>
+            <a href="#music">music</a>
+            <a href="#projects">projects</a>
+            <a href="#education">education</a>
+            <a href="">resumé</a>
+        </nav>
+    </header>
+    <section class="dark" id="about">
+        <span class="name"><img src="./Liam Headshot.jpg" alt="">About Me</span>
+        <div><span style='color: #7c7c7c'>~&&nbsp;</span><span class="cursor">█</span></div>
+        <p>Hello! I'm Liam, a 15-year-old student living in Austin, TX. I'm interested in all things computer science, from backend development to GLSL shaders. Currently, I'm pursuing my interest in environmental data science, and plan to attend a data science program this summer at TCU. Outside of programming, I enjoy playing the piano, and have done so for the last 11 years. I also joined a competitive rock climbing team a few years ago, and since then it has become my main sport in addition to something I do for fun. This summer, I will spend a month in Norway, where I will not only discover a foreign culture, but also go lead climbing with several other kids my age. Finally comes my interest in mathematics. I've always found math to be interested, and it has since inspired projects and course selections, and is likely one of the reasons data science is one of my main interests.</p>
+        <footer>
+            <span>- Liam <a href="mailto:liameeggleston@gmail.com"></a></span>
+        </footer>
+    </section>
+    <section id="technologies">
+        <span><span class="icon"></span>technologies</span>
+        <nav>
+            <div>
+                <img src="src/typescript.png" alt="">
+                Type/JavaScript
+            </div>
+            <div>
+                <img src="src/html.png" alt="">
+                HTML/CSS
+            </div>
+            <div>
+                <img src="src/go.png" alt="">
+                Go
+            </div>
+            <div>
+                <img src="src/c.png" alt="">
+                C/C++
+            </div>
+            <div>
+                <img src="src/python.png" alt="">
+                Python
+            </div>
+            <div>
+                <img src="src/nim.png" alt="">
+                Nim
+            </div>
+            <div>
+                <img src="src/rust.png" alt="">
+                Rust
+            </div>
+            <div>
+                <img src="src/sql.png" alt="">
+                SQL
+            </div>
+            <div>
+                <img src="src/bun.png" alt="">
+                Node.js/Bun
+            </div>
+            <div>
+                <img src="src/tailwind.png" alt="">
+                Next.js/Tailwind
+            </div>
+            <div>
+                <img src="src/tensorflow.png" alt="">
+                TensorFlow
+            </div>
+            <div>
+                <img src="src/git.png" alt="">
+                GitHub
+            </div>
+            <div>
+                <img src="src/r.png" alt="">
+                R
+            </div>
+        </nav>
+    </section>
+    <section class="dark" id="blog">
+        <span><span class="icon"></span>blog</span>
+        <nav>
+            <article>
+                <img src="" alt="">
+                <div>
+                    <span>1UI Design</span>
+                    <span>Tag 2</span>
+                    <span>Tag 3</span>
+                </div>
+                <span class="info">March 20, 2024 - 9 min read</span>
+                <span class="title">Lorem Ipsum Iolor sit, Amet Consectetur Adipisicing</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, consequatur. Error praesentium possimus, nisi tenetur nemo deleniti doloribus porro. Tenetur!</p>
+            </article>
+            <article>
+                <img src="" alt="">
+                <div>
+                    <span>2UI Design</span>
+                    <span>Tag 2</span>
+                    <span>Tag 3</span>
+                </div>
+                <span class="info">March 20, 2024 - 9 min read</span>
+                <span class="title">Lorem Ipsum Iolor sit, Amet Consectetur Adipisicing</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, consequatur. Error praesentium possimus, nisi tenetur nemo deleniti doloribus porro. Tenetur!</p>
+            </article>
+            <article>
+                <img src="" alt="">
+                <div>
+                    <span>3UI Design</span>
+                    <span>Tag 2</span>
+                    <span>Tag 3</span>
+                </div>
+                <span class="info">March 20, 2024 - 9 min read</span>
+                <span class="title">Lorem Ipsum Iolor sit, Amet Consectetur Adipisicing</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, consequatur. Error praesentium possimus, nisi tenetur nemo deleniti doloribus porro. Tenetur!</p>
+            </article>
+            <article>
+                <img src="" alt="">
+                <div>
+                    <span>4UI Design</span>
+                    <span>Tag 2</span>
+                    <span>Tag 3</span>
+                </div>
+                <span class="info">March 20, 2024 - 9 min read</span>
+                <span class="title">Lorem Ipsum Iolor sit, Amet Consectetur Adipisicing</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, consequatur. Error praesentium possimus, nisi tenetur nemo deleniti doloribus porro. Tenetur!</p>
+            </article>
+            <article>
+                <img src="" alt="">
+                <div>
+                    <span>5UI Design</span>
+                    <span>Tag 2</span>
+                    <span>Tag 3</span>
+                </div>
+                <span class="info">March 20, 2024 - 9 min read</span>
+                <span class="title">Lorem Ipsum Iolor sit, Amet Consectetur Adipisicing</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, consequatur. Error praesentium possimus, nisi tenetur nemo deleniti doloribus porro. Tenetur!</p>
+            </article>
+        </nav>
+        <footer>
+            <section class="current">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div class="active"></div>
+            </section>
+            <section class="navigation">
+                <button id="last" disabled><span class="icon"></span></button>
+                <button id="next"><span class="icon"></span></button>
+            </section>
+        </footer>
+    </section>
+    <section id="music">
+        <span><span class="icon"></span>music</span>
+        <p>I've been playing piano ever since I was 4 (almost 12 years now!). In middle school, I participated in my school's band in addition to private lessons. In high school, also in addition to private lessons, I played in my school's jazz band, and plan to join orchestra next (junior) year. The orchestra director has asked me to play Rachmaninoff's second piano concerto (the second movement), and it's a piece I've wanted to play for a long time. Some past songs of mine since the spring of 2021 are listed below.</p>
+        <nav>
+            <article>
+                <img src="src/rachmaninoff.bmp" alt="">
+                <span class="composer">Sergei Rachmaninoff</span>
+                <span class="info">Currently Playing</span>
+                <!-- <video src=""></video> -->
+                <span class="title">Piano Concerto No. 2, Op. 18: 2. Adagio sostenuto</span>
+            </article>
+            <article>
+                <img src="src/liszt.bmp" alt="">
+                <span class="composer">Franz Liszt</span>
+                <span class="info">Spring 2024</span>
+                <!-- <video src=""></video> -->
+                <span class="title">3 Études de Concert, S. 144: No. 3 "Un sospiro"</span>
+            </article>
+            <article>
+                <img src="src/liszt.bmp" alt="">
+                <span class="composer">Franz Liszt</span>
+                <span class="info">Spring 2024</span>
+                <!-- <video src=""></video> -->
+                <span class="title">Liebestraum No. 3, S. 541 / 3</span>
+            </article>
+            <article>
+                <img src="src/chopin.bmp" alt="">
+                <span class="composer">Frédéric Chopin</span>
+                <span class="info">Winter 2023</span>
+                <!-- <video src=""></video> -->
+                <span class="title">"Revolutionary" Étude Op. 10 No. 12</span>
+            </article>
+            <article>
+                <img src="src/beethoven.bmp" alt="">
+                <span class="composer">Ludwig van Beethoven</span>
+                <span class="info">Spring 2023</span>
+                <!-- <video src=""></video> -->
+                <span class="title">Sonata No. 14 "Moonlight", Op. 27 No. 2: 3. Presto agitato</span>
+            </article>
+            <article>
+                <img src="src/mendelssohn.bmp" alt="">
+                <span class="composer">Felix Mendelssohn</span>
+                <span class="info">Winter 2022</span>
+                <!-- <video src=""></video> -->
+                <span class="title">Rondo Capriccioso, Op. 14: 1. Andante</span>
+            </article>
+            <article>
+                <img src="src/chopin.bmp" alt="">
+                <span class="composer">Frédéric Chopin</span>
+                <span class="info">Spring 2022</span>
+                <!-- <video src=""></video> -->
+                <span class="title">"Torrent" Étude Op. 10 No. 4</span>
+            </article>
+            <article>
+                <img src="src/rachmaninoff.bmp" alt="">
+                <span class="composer">Sergei Rachmaninoff</span>
+                <span class="info">Winter 2021</span>
+                <!-- <video src=""></video> -->
+                <span class="title">Prelude in C-Sharp Minor, Op. 3 No. 2</span>
+            </article>
+            <article>
+                <img src="src/liszt.bmp" alt="">
+                <span class="composer">Franz Liszt</span>
+                <span class="info">Spring 2021</span>
+                <!-- <video src=""></video> -->
+                <span class="title">La Campanella</span>
+            </article>
+        </nav>
+    </section>
+    <section class="dark" id="projects">
+        <span><span class="icon"></span>projects</span>
+        <nav>
+            <article>
+                <span class="name">Lorem ipsum dolor sit amet consectetur.</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto reiciendis dolorum iusto rem nostrum cupiditate perspiciatis hic veritatis fugit, natus labore accusamus earum ut deleniti?</p>
+                <button>
+                    <span class="icon brands"></span>
+                </button>
+            </article>
+            <article>
+                <span class="name">Lorem ipsum dolor sit amet consectetur.</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto reiciendis dolorum iusto rem nostrum cupiditate perspiciatis hic veritatis fugit, natus labore accusamus earum ut deleniti?</p>
+                <button>
+                    <span class="icon brands"></span>
+                </button>
+            </article>
+            <article>
+                <span class="name">Lorem ipsum dolor sit amet consectetur.</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto reiciendis dolorum iusto rem nostrum cupiditate perspiciatis hic veritatis fugit, natus labore accusamus earum ut deleniti?</p>
+                <button>
+                    <span class="icon brands"></span>
+                </button>
+            </article>
+            <article>
+                <span class="name">Lorem ipsum dolor sit amet consectetur.</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto reiciendis dolorum iusto rem nostrum cupiditate perspiciatis hic veritatis fugit, natus labore accusamus earum ut deleniti?</p>
+                <button>
+                    <span class="icon brands"></span>
+                </button>
+            </article>
+        </nav>
+    </section>
+    <section id="education">
+        <span><span class="icon"></span>education</span>
+        <span class="section">Relevant Coursework</span>
+        <ul>
+            <li><a href="https://www.coursera.org/learn/what-is-datascience">IBM: What is Data Science?</a></li>
+            <li><a href="https://www.coursera.org/specializations/introduction-data-science">IBM: Introduction to Data Science Specialization</a></li>
+            <li><a href="https://www.coursera.org/learn/foundations-of-data-science">Google: Foundations of Data Science</a></li>
+            <li><a href="https://www.coursera.org/learn/datasciencemathskills">Duke University: Data Science Math Skills</a></li>
+            <li><a href="https://www.coursera.org/learn/stanford-statistics">Stanford: Introduction to Statistics</a></li>
+            &nbsp;
+        </ul>
+        <span class="section">Current Courses (11th Grade)</span>
+        <ul>
+            <li>Multivariable Calculus</li>
+            <li>Advanced Physics 2</li>
+            <li>Independent Study in Computer Science</li>
+            <li>Advanced Spanish 5</li>
+            <li>English 11</li>
+            <li>History 11</li>
+            <li>Orchestra</li>
+            &nbsp;
+        </ul>
+    </section>
+    <section class="dark" id="footer">
+        <span>made with<span class="icon"></span>in vanilla HTML</span>
+        <div>
+            <a href="https://github.com/el5eif" target="_blank"></a>
+            <a href="https://www.youtube.com/@else1f/featured" target="_blank"></a>
+            <a href="https://www.instagram.com/liam.eggs/" target="_blank"></a>
+        </div>
+    </section>
+    <script>
+        const next = document.getElementById('next'),
+            last = document.getElementById('last'),
+            nav = document.querySelector('section#blog>nav'),
+            pages = document.querySelector('section.current'),
+            indicator = pages.querySelector('div.active')
+
+        last.setAttribute('disabled', 'true')
+        
+        nav.scrollLeft = indicator.style.left = 0
+
+        let page = 1,
+            db = false
+        next.addEventListener('click', () => {
+            if (db) return
+            db = true
+            last.removeAttribute('disabled')
+            indicator.style.setProperty('--destination', 15 * page + 'px')
+            indicator.classList.add('forwards')
+            setTimeout(() => {
+                indicator.style.left = 15 * (page - 1) + 'px'
+                indicator.classList.remove('forwards')
+                db = false
+            }, 390)
+            nav.scrollLeft = page * 370
+            page ++
+
+            if (page === nav.children.length) next.setAttribute('disabled', 'true')
+        })
+        last.addEventListener('click', () => {
+            if (db) return
+            db = true
+            next.removeAttribute('disabled')
+            page --
+            indicator.style.setProperty('--destination', 15 * page + 'px')
+            indicator.classList.add('backwards')
+            setTimeout(() => {
+                indicator.style.left = 15 * (page - 1) + 'px'
+                indicator.classList.remove('backwards')
+                db = false
+            }, 390)
+            nav.scrollLeft = (page - 1) * 370
+
+            if (page === 1) last.setAttribute('disabled', 'true')
+        })
+
+        document.addEventListener('scroll', () => {
+            const scroll = document.documentElement.scrollTop
+            if (scroll === 0) document.querySelector('header').classList.remove('scrolled')
+            else document.querySelector('header').classList.add('scrolled')
+        })
+    </script>
+    <script>
+        const div = document.querySelector('section#about>div'),
+            cursor = div.querySelector('span:last-child')
+        const info = {
+            text: '\nLiam Eggleston is a student currently attending St. Stephen\'s Episcopal School  in Austin, TX. His main interests include computer science, mathematics, and competitive rock climbing. His hobbies include playing the piano, making websites, and making programming YouTube videos.',
+            colors: {
+                0: null,
+                49: '#DFB250',
+                79: null,
+                84: '#CC99CD',
+                94: null,
+                123: '#64C4C3',
+                139: null,
+                141: '#64C4C3',
+                152: null,
+                158: '#64C4C3',
+                183: null,
+                205: '#64C4C3',
+                222: null,
+                224: '#64C4C3',
+                239: null,
+                245: '#64C4C3',
+                252: '#72AF89',
+                278: null
+            },
+            links: {
+                49: 'https://sstx.org/',
+                252: 'https://www.youtube.com/@else1f'
+            }
+        }
+
+        let element;
+        const typewrite = (i, message, colors, links) => new Promise(resolve => {
+            if (i == message.length) return resolve(1)
+            if (i in colors) {
+                if (i in links) {
+                    element = document.createElement('a')
+                    element.href = links[i]
+                    element.target = '_blank'
+                } else element = document.createElement('span')
+                if (colors[i]) element.style.color = colors[i]
+                div.insertBefore(element, cursor)
+            }
+            element.innerText += (message[i - 1] == ' ' ? ' ' : '') + message[i]
+            setTimeout(() => typewrite(++ i, message, colors, links).then(resolve), Math.random() * 100)
+        }),
+            wait = time => new Promise(resolve => setTimeout(resolve, time))
+        
+        window.addEventListener('load', async () => {
+            await typewrite(0, 'cat about.txt', {0: null}, {})
+            cursor.classList.add('active')
+            await wait(2000)
+            cursor.classList.remove('active')
+            await typewrite(0, info.text, info.colors, info.links)
+            
+            element = document.createElement('span')
+            element.innerText = '\n~& '
+            element.style.color = '#7C7C7C'
+            div.insertBefore(element, cursor)
+            cursor.classList.add('active')
+        })
+    </script>
+</body>
+</html>

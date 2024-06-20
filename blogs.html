@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liam Eggleston</title>
+    <style>
+        @font-face {
+            font-family: Icons;
+            src: url('./regular.woff2') format('woff2');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: Icons;
+            src: url('./light.woff2') format('woff2');
+            font-weight: 300;
+        }
+        @font-face {
+            font-family: Icons;
+            src: url('./brands.woff2') format('woff2');
+            font-weight: 800;
+        }
+        @font-face {
+            font-family: Inter;
+            src: url('./Inter.ttf') format('ttf');
+        }
+        :root {
+            --background: #121212;
+            --foreground: #212023;
+            --item: #2f2e31;
+            --light: #3b3a3e;
+            --primary: #f26a79;
+            --secondary: #7a7a7a;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            outline: none;
+            border: none;
+            background: none;
+            font-family: "Inter", sans-serif;
+        }
+        span.icon { font-family: Icons; font-weight: 500; }
+        span.icon.light { font-weight: 300; }
+        span.icon.brands { font-weight: 800; }
+        button { cursor: pointer; }
+        a { color: #3f51c7; }
+
+        body {
+            background: var(--background);
+            height: 100vh;
+
+            display: grid;
+            grid-template-rows: 70px 60px 1fr;
+            gap: 20px;
+        }
+        header {
+            padding: 0 25px;
+            background: var(--foreground);
+
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        header > span.title {
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            margin-right: auto;
+        }
+        header > a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 450;
+            transition: color 0.3s;
+
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        header > a:hover { color: white; }
+        header > a > span.icon { font-size: 14px;}
+
+        nav {
+            color: white;
+            padding: 0 25px 25px;
+            overflow: hidden auto;
+
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        }
+        nav > article {
+            padding: 20px 22px;
+            background: var(--foreground);
+            border-radius: 10px;
+            height: max-content;
+            cursor: pointer;
+
+            display: grid;
+            grid-template: 25px auto auto / 100%;
+            gap: 5px;
+        }
+        nav > article * { pointer-events: none; }
+        nav > article:has(img) { grid-template: 25px auto auto / 1fr 120px; }
+        nav > article > span.name {
+            font-weight: 600;
+            font-size: 22px;
+        }
+        nav > article > div {
+            height: 25px;
+            
+            display: flex;
+            gap: 5px;
+        }
+        nav > article > div > span {
+            padding: 4px 8px;
+            background: var(--item);
+            border-radius: 15px;
+            font-size: 13px;
+        }
+        nav > article > p {
+            font-weight: 430;
+            line-height: 20px;
+        }
+        nav > article > img {
+            grid-area: span 3;
+            height: 120px;
+            width: 120px;
+            border-radius: 7px;
+            background: var(--item);
+        }
+
+        menu {
+            background: var(--foreground);
+            margin: 0 25px;
+            padding: 0 15px;
+            border-radius: 8px;
+
+            display: grid;
+            align-items: center;
+            gap: 10px;
+            grid-template: auto / auto auto auto 1fr;
+        }
+        menu > select {
+            padding: 7px 5px;
+            background: var(--item);
+            color: white;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        menu > input {
+            font-size: 16px;
+            color: white;
+            font-weight: 500;
+        }
+        menu > span.icon {
+            color: white;
+            margin-left: 6px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <header>
+        <span>Liam Eggleston</span>
+        <div>
+            <a href="https://github.com/el5eif" target="_blank"></a>
+            <a href="https://www.youtube.com/@else1f/featured" target="_blank"></a>
+            <a href="https://www.ins<span class="icon light">#</span> tagram.com/liam.eggs/" target="_blank"></a>
+        </div>
+        <nav>
+            <a href="#top">about me</a>
+            <a href="#technologies">technologies</a>
+            <a href="#blog">blog</a>
+            <a href="#music">music</a>
+            <a href="#projects">projects</a>
+            <a href="#education">education</a>
+            <a href="">resumé</a>
+        </nav>
+    </header> -->
+    <header>
+        <span class="title">Liam Eggleston</span>
+        <a href="../portfolio.html"><span class="icon"></span>portfolio</a>
+        <a href=""><span class="icon"></span>résumé</a>
+    </header>
+    <menu>
+        <select name="" id="">
+            <option value="">tags</option>
+            <option value="">posts</option>
+        </select>
+        <select name="" id="">
+            <option value="">Newest</option>
+            <option value="">Oldest</option>
+            <option value="">A-Z</option>
+            <option value="">Z-A</option>
+            <option value="">Longest</option>
+            <option value="">Shortest</option>
+        </select>
+        <span class="icon"></span>
+        <input type="text" name="" id="" placeholder="Search blog posts">
+    </menu>
+    <nav>
+        <article id="1">
+            <div>
+                <span><span class="icon light">#</span> tag 1</span>
+                <span><span class="icon light">#</span> tag 2</span>
+                <span><span class="icon light">#</span> tag 3</span>
+                <span><span class="icon light">#</span> tag 4</span>
+                <span><span class="icon light">#</span> tag 5</span>
+            </div>
+            <img src="" alt="">
+            <span class="name">Lorem ipsum, dolor sit amet consectetur adipisicing.</span>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, doloremque? A ullam quisquam ipsam dolor perspiciatis voluptatum cumque perferendis eveniet doloremque iusto tempora, dolorum ducimus libero rem corporis praesentium. Quod.</p>
+        </article>
+        <article>
+            <div>
+                <span><span class="icon light">#</span> tag 1</span>
+                <span><span class="icon light">#</span> tag 2</span>
+                <span><span class="icon light">#</span> tag 3</span>
+                <span><span class="icon light">#</span> tag 4</span>
+                <span><span class="icon light">#</span> tag 5</span>
+            </div>
+            <span class="name">Lorem ipsum, dolor sit amet consectetur adipisicing.</span>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, doloremque? A ullam quisquam ipsam dolor perspiciatis voluptatum cumque perferendis eveniet doloremque iusto tempora, dolorum ducimus libero rem corporis praesentium. Quod.</p>
+        </article>
+        <article>
+            <div>
+                <span><span class="icon light">#</span> tag 1</span>
+                <span><span class="icon light">#</span> tag 2</span>
+                <span><span class="icon light">#</span> tag 3</span>
+                <span><span class="icon light">#</span> tag 4</span>
+                <span><span class="icon light">#</span> tag 5</span>
+            </div>
+            <img src="" alt="">
+            <span class="name">Lorem ipsum, dolor sit amet consectetur adipisicing.</span>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, doloremque? A ullam quisquam ipsam dolor perspiciatis voluptatum cumque perferendis eveniet doloremque iusto tempora, dolorum ducimus libero rem corporis praesentium. Quod.</p>
+        </article>
+        <article>
+            <div>
+                <span><span class="icon light">#</span> tag 1</span>
+                <span><span class="icon light">#</span> tag 2</span>
+                <span><span class="icon light">#</span> tag 3</span>
+                <span><span class="icon light">#</span> tag 4</span>
+                <span><span class="icon light">#</span> tag 5</span>
+            </div>
+            <img src="" alt="">
+            <span class="name">Lorem ipsum, dolor sit amet consectetur adipisicing.</span>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, doloremque? A ullam quisquam ipsam dolor perspiciatis voluptatum cumque perferendis eveniet doloremque iusto tempora, dolorum ducimus libero rem corporis praesentium. Quod.</p>
+        </article>
+        <article>
+            <div>
+                <span><span class="icon light">#</span> tag 1</span>
+                <span><span class="icon light">#</span> tag 2</span>
+                <span><span class="icon light">#</span> tag 3</span>
+                <span><span class="icon light">#</span> tag 4</span>
+                <span><span class="icon light">#</span> tag 5</span>
+            </div>
+            <img src="" alt="">
+            <span class="name">Lorem ipsum, dolor sit amet consectetur adipisicing.</span>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, doloremque? A ullam quisquam ipsam dolor perspiciatis voluptatum cumque perferendis eveniet doloremque iusto tempora, dolorum ducimus libero rem corporis praesentium. Quod.</p>
+        </article>
+        <article>
+            <div>
+                <span><span class="icon light">#</span> tag 1</span>
+                <span><span class="icon light">#</span> tag 2</span>
+                <span><span class="icon light">#</span> tag 3</span>
+                <span><span class="icon light">#</span> tag 4</span>
+                <span><span class="icon light">#</span> tag 5</span>
+            </div>
+            <img src="" alt="">
+            <span class="name">Lorem ipsum, dolor sit amet consectetur adipisicing.</span>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, doloremque? A ullam quisquam ipsam dolor perspiciatis voluptatum cumque perferendis eveniet doloremque iusto tempora, dolorum ducimus libero rem corporis praesentium. Quod.</p>
+        </article>
+        <article>
+            <div>
+                <span><span class="icon light">#</span> tag 1</span>
+                <span><span class="icon light">#</span> tag 2</span>
+                <span><span class="icon light">#</span> tag 3</span>
+                <span><span class="icon light">#</span> tag 4</span>
+                <span><span class="icon light">#</span> tag 5</span>
+            </div>
+            <img src="" alt="">
+            <span class="name">Lorem ipsum, dolor sit amet consectetur adipisicing.</span>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, doloremque? A ullam quisquam ipsam dolor perspiciatis voluptatum cumque perferendis eveniet doloremque iusto tempora, dolorum ducimus libero rem corporis praesentium. Quod.</p>
+        </article>
+        <article>
+            <div>
+                <span><span class="icon light">#</span> tag 1</span>
+                <span><span class="icon light">#</span> tag 2</span>
+                <span><span class="icon light">#</span> tag 3</span>
+                <span><span class="icon light">#</span> tag 4</span>
+                <span><span class="icon light">#</span> tag 5</span>
+            </div>
+            <img src="" alt="">
+            <span class="name">Lorem ipsum, dolor sit amet consectetur adipisicing.</span>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, doloremque? A ullam quisquam ipsam dolor perspiciatis voluptatum cumque perferendis eveniet doloremque iusto tempora, dolorum ducimus libero rem corporis praesentium. Quod.</p>
+        </article>
+    </nav>
+    <script>
+        const children = Array.from(document.querySelector('nav').children)
+
+        for (let i = 0; i < children.length; i ++) {
+            children[i].addEventListener('click', () => location.replace('/posts/' + (i + 1) + '.html'))
+        }
+    </script>
+</body>
+</html>
